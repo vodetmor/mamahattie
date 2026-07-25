@@ -36,6 +36,16 @@ curl -s -D - "https://pay.hotmart.com/{CODIGO}?checkoutMode=2" -o /dev/null \
 
 Isso é o primeiro passo obrigatório antes de tentar replicar para qualquer outra plataforma (Eduzz, Kiwify, Stripe Checkout hospedado, etc.) — cada uma pode ter política diferente, e pode mudar sem aviso.
 
+> **ATUALIZAÇÃO 25/07/2026 — decisão superada em produção:** o `scrolling="no"` foi
+> REMOVIDO. Motivo: formulários de países diferentes têm alturas diferentes
+> (endereço, imposto, order bump, mais métodos de pagamento) e altura fixa sem
+> scroll deixava campos INACESSÍVEIS para parte dos compradores — perda direta de
+> venda. O modelo atual: seção do checkout em fundo BRANCO (funde com o form da
+> Hotmart), altura generosa por breakpoint (1950px desktop / 2250px mobile) para
+> que a maioria nunca veja scroll interno, e scroll interno habilitado como
+> válvula de segurança para os casos maiores. A seção abaixo fica como registro
+> histórico da técnica original.
+
 ## Por que `scrolling="no"` + altura fixa generosa (não auto-resize)
 
 Como o iframe é **cross-origin**, o JavaScript da página pai não consegue ler `scrollHeight` do conteúdo interno (bloqueio padrão do navegador, same-origin policy). Isso significa:
