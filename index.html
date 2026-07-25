@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>51 Southern Remedies My Grandmother Taught Me</title>
 <meta name="description" content="Mama Hattie's Southern Healing Secrets — 51 kitchen-table remedies, written down at last.">
 <style>
@@ -151,17 +151,20 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
 .taste-cap p { font-size: 13.5px; color: var(--cream); opacity: .92; max-width: 300px; margin: 0 auto; }
 .taste-more { text-align: center; margin-top: 30px; font-style: italic; color: var(--gold-3); font-size: 15.5px; }
 
-/* ---------- DISCOVER (light cards) ---------- */
-.sec-card { background: var(--paper-2); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;
+/* ---------- DISCOVER (grade compacta escaneavel) ---------- */
+.disc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.disc-item { display: flex; gap: 11px; align-items: flex-start; background: var(--paper-2);
+  border: 1px solid var(--line); border-radius: 10px; padding: 13px 15px;
   transition: border-color .18s ease, box-shadow .18s ease; }
-.sec-card:hover { border-color: #D9BE7E; box-shadow: 0 4px 12px rgba(184,134,47,.10); }
-.sec-card .n { display: inline-block; background: var(--green-600); color: var(--paper); font-size: 11px;
+.disc-item:hover { border-color: #D9BE7E; box-shadow: 0 4px 12px rgba(184,134,47,.10); }
+.disc-item .n { flex: none; display: inline-block; background: var(--green-600); color: var(--paper); font-size: 11px;
   font-family: 'Palatino Linotype',Georgia,serif; border-radius: 50%; width: 24px; height: 24px; line-height: 24px;
-  text-align: center; margin-right: 8px; }
-.sec-card h3 { display: inline; font-size: 15.5px; letter-spacing: .02em; }
-.sec-card p { font-size: 13.5px; color: var(--ink-2); margin: 8px 0 0; }
-.sec-card.bonus { background: var(--gold-3); border-color: #E0B95B; }
-.sec-card.bonus .n { background: var(--gold); }
+  text-align: center; margin-top: 1px; }
+.disc-item h3 { font-size: 14.5px; letter-spacing: .02em; margin-bottom: 2px; }
+.disc-item p { font-size: 12.5px; color: var(--ink-2); line-height: 1.5; }
+.disc-item.bonus { grid-column: 1 / -1; background: var(--gold-3); border-color: #E0B95B; }
+.disc-item.bonus .n { background: var(--gold); }
+@media (max-width: 640px) { .disc-grid { grid-template-columns: 1fr; } }
 
 /* ---------- includes checklist (dark card) ---------- */
 .includes { background: var(--green-700); color: var(--cream); border-radius: 14px; padding: 26px 24px; margin: 30px 0 0; }
@@ -189,9 +192,21 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
 .value-stack .downloads b { color: var(--ink); }
 .value-stack .cta-btn { box-shadow: 0 6px 18px rgba(184,134,47,.3); }
 
-/* ---------- reviews ---------- */
-.reviews { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 26px; }
-.review { background: var(--paper-3); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+/* ---------- reviews (carrossel scroll-snap) ---------- */
+.rev-wrap { position: relative; margin-top: 26px; }
+.reviews { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding: 4px 2px 14px; scrollbar-width: thin; scrollbar-color: #D9BE7E transparent;
+  -webkit-overflow-scrolling: touch; }
+.review { flex: 0 0 86%; scroll-snap-align: start; background: var(--paper-3);
+  border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.rev-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px;
+  border-radius: 50%; border: 1px solid var(--gold); background: var(--paper-3); color: var(--gold);
+  cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 19px;
+  line-height: 1; z-index: 3; box-shadow: 0 4px 12px rgba(44,58,42,.15); transition: background .18s ease; }
+.rev-nav:hover { background: var(--gold-3); }
+.rev-nav:focus-visible { outline: 3px solid var(--gold-2); outline-offset: 2px; }
+.rev-prev { left: -12px; }
+.rev-next { right: -12px; }
 .review .rhead { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; }
 .review .avatar { width: 34px; height: 34px; border-radius: 50%; flex: 0 0 34px;
   display: flex; align-items: center; justify-content: center;
@@ -251,7 +266,7 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
 /* ---------- sticky CTA ---------- */
 .sticky-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
   background: rgba(27,38,25,.97); color: var(--cream); display: flex; align-items: center; justify-content: center;
-  gap: 14px; padding: 10px 16px; box-shadow: 0 -4px 16px rgba(18,26,16,.4);
+  gap: 14px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); box-shadow: 0 -4px 16px rgba(18,26,16,.4);
   transform: translateY(0); transition: transform .25s ease; }
 .sticky-cta.hidden { transform: translateY(110%); }
 .sticky-cta .sp { font-family: 'Palatino Linotype', Georgia, serif; font-size: 17px; color: var(--gold-2); font-weight: 700; }
@@ -275,11 +290,14 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
   .mama-inner { padding: 6px 0 54px; }
   .mama-copy { max-width: 100%; text-align: center; }
   .pain-cards { grid-template-columns: 1fr; }
-  .taste-strip { grid-template-columns: 1fr; }
-  .taste-cell img { height: 380px; }
+  /* vitrine mobile: carrossel horizontal com snap (nao empilha 3 fotos altas) */
+  .taste-strip { display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+    scrollbar-width: thin; scrollbar-color: rgba(232,196,104,.5) transparent; -webkit-overflow-scrolling: touch; }
+  .taste-cell { flex: 0 0 86%; scroll-snap-align: center; }
+  .taste-cell img { height: 360px; }
 }
 @media (min-width: 720px) {
-  .reviews { grid-template-columns: 1fr 1fr; }
+  .review { flex: 0 0 calc(50% - 6px); }
 }
 </style>
 </head>
@@ -501,35 +519,18 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
     <h2 class="h2">Inside You'll Discover <svg class="ic" style="color:var(--green-600)"><use href="#i-check"/></svg></h2>
     <p class="h2-sub">51 remedies. Nine sections. One grandmother's kitchen.</p>
 
-    <div class="sec-card"><span class="n">1</span><h3>Look Younger</h3>
-      <p>Ten remedies for the mirror. Soften the lines, fade the spots, tighten your jawline, and regrow your edges — with what's already in your kitchen.</p></div>
-
-    <div class="sec-card"><span class="n">2</span><h3>The Sunday Dress Section</h3>
-      <p>No diets. No suffering. Drop the bloat, quiet the cravings, and get back into the dress that's been waiting in your closet.</p></div>
-
-    <div class="sec-card"><span class="n">3</span><h3>The Sugar</h3>
-      <p>The remedies our grandmothers used for "the sugar" — steady your blood sugar, stop the crashes, and take back control before the doctor starts using careful words.</p></div>
-
-    <div class="sec-card"><span class="n">4</span><h3>Wash It Out</h3>
-      <p>Flush the parasites, toxins, and waste your body has been holding for years. A clean liver shows on your face — and you'll feel lighter than you have in decades.</p></div>
-
-    <div class="sec-card"><span class="n">5</span><h3>Aches &amp; Pains</h3>
-      <p>Attack pain at the root — not just the symptom. Calm the inflammation that's been destroying your joints and stealing your mobility.</p></div>
-
-    <div class="sec-card"><span class="n">6</span><h3>Beauty Sleep</h3>
-      <p>Finally rest the way your body was meant to. Fall asleep faster, stay asleep longer, and wake up with your face rested instead of wrinkled.</p></div>
-
-    <div class="sec-card"><span class="n">7</span><h3>Women's Health &amp; The Change</h3>
-      <p>Support for every stage — cramps, hormones, hot flashes, the change. The remedies your grandmother used that actually work.</p></div>
-
-    <div class="sec-card"><span class="n">8</span><h3>Winter Armor</h3>
-      <p>Fight back before sickness takes hold. Build an immune system that protects you all year long.</p></div>
-
-    <div class="sec-card"><span class="n">9</span><h3>A Happy Belly</h3>
-      <p>End the bloating, gas, and bathroom struggles. Fix your gut and watch everything else start to heal.</p></div>
-
-    <div class="sec-card bonus"><span class="n">51</span><h3>The One Mama Saved For Last</h3>
-      <p>The 4,000-year-old rice water secret from the village where the women grow hair past their knees.</p></div>
+    <div class="disc-grid">
+      <div class="disc-item"><span class="n">1</span><div><h3>Look Younger</h3><p>Soften lines, fade spots, tighten your jawline, regrow your edges.</p></div></div>
+      <div class="disc-item"><span class="n">2</span><div><h3>The Sunday Dress</h3><p>Drop the bloat, quiet the cravings — no diets, no suffering.</p></div></div>
+      <div class="disc-item"><span class="n">3</span><div><h3>The Sugar</h3><p>Steady your blood sugar and stop the crashes.</p></div></div>
+      <div class="disc-item"><span class="n">4</span><div><h3>Wash It Out</h3><p>Flush the parasites, toxins, and waste. Feel lighter in decades.</p></div></div>
+      <div class="disc-item"><span class="n">5</span><div><h3>Aches &amp; Pains</h3><p>Calm the inflammation stealing your joints and mobility.</p></div></div>
+      <div class="disc-item"><span class="n">6</span><div><h3>Beauty Sleep</h3><p>Fall asleep faster, stay asleep longer, wake up rested.</p></div></div>
+      <div class="disc-item"><span class="n">7</span><div><h3>Women's Health &amp; The Change</h3><p>Cramps, hormones, hot flashes — remedies that actually work.</p></div></div>
+      <div class="disc-item"><span class="n">8</span><div><h3>Winter Armor</h3><p>An immune system that protects you all year long.</p></div></div>
+      <div class="disc-item"><span class="n">9</span><div><h3>A Happy Belly</h3><p>End the bloating, gas, and bathroom struggles.</p></div></div>
+      <div class="disc-item bonus"><span class="n">51</span><div><h3>The One Mama Saved For Last</h3><p>The 4,000-year-old rice water secret from the village where the women grow hair past their knees.</p></div></div>
+    </div>
 
     <div class="includes">
       <h3>Each Remedy Includes</h3>
@@ -569,7 +570,11 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
     </div>
 
     <h2 class="h2" style="margin-top:44px;">What Folks Are Saying</h2>
-    <div class="reviews" id="reviews"></div>
+    <div class="rev-wrap">
+      <button class="rev-nav rev-prev" type="button" aria-label="Previous reviews">&#10094;</button>
+      <div class="reviews" id="reviews"></div>
+      <button class="rev-nav rev-next" type="button" aria-label="Next reviews">&#10095;</button>
+    </div>
   </div>
 </section>
 
@@ -674,6 +679,14 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
     card.querySelector('.name').textContent = r[0];
     card.querySelector('p').textContent = r[2];
     host.appendChild(card);
+  });
+
+  /* ---- carrossel de reviews: setas rolam ~1 pagina ---- */
+  document.querySelector('.rev-prev').addEventListener('click', function () {
+    host.scrollBy({ left: -host.clientWidth * 0.92, behavior: 'smooth' });
+  });
+  document.querySelector('.rev-next').addEventListener('click', function () {
+    host.scrollBy({ left: host.clientWidth * 0.92, behavior: 'smooth' });
   });
 
   /* ---- sticky CTA: acompanha a pagina inteira (1 scroll so).
