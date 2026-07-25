@@ -100,9 +100,9 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
 .hero-deco { position: absolute; color: var(--gold-2); opacity: .10; pointer-events: none; z-index: 0; }
 @media (prefers-reduced-motion: reduce) { .hero-mock img, .spark { animation: none; } }
 
-/* ---------- MEET MAMA (dark, portrait fused full-bleed right) ---------- */
-.mama { position: relative; background: linear-gradient(180deg, var(--green-950) 0%, var(--green-900) 55%, var(--green-950) 100%);
-  color: var(--cream); overflow: hidden; }
+/* ---------- MEET MAMA (near-black, portrait fused full-bleed right) ---------- */
+.mama { position: relative; background: linear-gradient(180deg, #0A0D09 0%, #10150E 45%, #0A0D09 100%);
+  color: var(--cream); overflow: hidden; border-top: 1px solid rgba(232,196,104,.18); border-bottom: 1px solid rgba(232,196,104,.12); }
 .mama-fig { position: absolute; right: 0; top: 0; bottom: 0; width: 46%; }
 .mama-fig img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%;
   -webkit-mask-image: linear-gradient(to left, #000 55%, transparent 100%);
@@ -220,6 +220,30 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
 /* ---------- rule ---------- */
 .rule { text-align: center; margin: 0; padding: 8px 0; }
 .rule .sprig { width: 100px; height: 32px; }
+
+/* ---------- tonal band (value + reviews) ---------- */
+.band { background: var(--paper-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.band .value-stack { background: var(--paper-3); }
+.band .review { background: #FFFEFA; }
+
+/* ---------- FAQ (dark) ---------- */
+.faq { background: linear-gradient(180deg, var(--green-950) 0%, var(--green-900) 40%, var(--green-950) 100%);
+  color: var(--cream); }
+.faq .h2 { color: var(--paper); }
+.faq .h2-sub { color: var(--cream-2); }
+.faq .kicker { display: block; text-align: center; margin-bottom: 10px; color: var(--gold-2); }
+.faq details { border: 1px solid rgba(232,196,104,.22); border-radius: 12px; margin-bottom: 10px;
+  background: rgba(36,51,31,.45); transition: border-color .2s ease; overflow: hidden; }
+.faq details:hover { border-color: rgba(232,196,104,.5); }
+.faq details[open] { border-color: rgba(232,196,104,.55); }
+.faq summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 12px;
+  font-family: 'Palatino Linotype', Georgia, serif; font-size: 15.5px; color: var(--gold-3);
+  padding: 15px 18px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; margin-left: auto; color: var(--gold-2); font-size: 20px; line-height: 1;
+  transition: transform .2s ease; flex: none; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq .fa { padding: 0 18px 16px 18px; font-size: 14px; color: var(--cream); opacity: .92; }
 
 /* ---------- sticky CTA ---------- */
 .sticky-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
@@ -532,7 +556,7 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
 <div class="rule"><svg class="sprig" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#B8862F" stroke-width="1.3" stroke-linecap="round"><path d="M60 34 C60 22 60 14 60 6"/><path d="M60 26 C52 24 46 20 42 14"/><path d="M60 26 C68 24 74 20 78 14"/></g><circle cx="60" cy="4" r="2.3" fill="#B8862F"/></svg></div>
 
 <!-- ====== VALUE + REVIEWS ====== -->
-<section class="section" style="padding-top:26px;">
+<section class="section band" style="padding-top:34px;">
   <div class="wrap-narrow">
     <div class="value-stack">
       <div class="vs-was">Total Value: <s>$47</s></div>
@@ -543,6 +567,40 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
 
     <h2 class="h2" style="margin-top:44px;">What Folks Are Saying</h2>
     <div class="reviews" id="reviews"></div>
+  </div>
+</section>
+
+<!-- ====== FAQ ====== -->
+<section class="section faq">
+  <div class="wrap-narrow">
+    <span class="kicker">Before you ask, baby</span>
+    <h2 class="h2">Questions Folks Always Ask</h2>
+    <p class="h2-sub">Straight answers, no runaround.</p>
+
+    <details>
+      <summary>What exactly am I getting?</summary>
+      <div class="fa">A digital book (PDF) with all 51 remedies — the story behind each one, what it's for, why it works, the exact recipe with amounts, what to expect day by day, pro tips, and safety cautions. You can read it on your phone, tablet, or computer, and print it if you like paper in your hands.</div>
+    </details>
+    <details>
+      <summary>When do I receive it?</summary>
+      <div class="fa">The moment your payment goes through. You'll get an email with your download link — most folks are reading it within two minutes. No shipping, no waiting.</div>
+    </details>
+    <details>
+      <summary>Are the ingredients hard to find?</summary>
+      <div class="fa">Almost everything is already in your kitchen or at any grocery store — things like lemon, ginger, honey, cinnamon, apple cider vinegar, and rice. No strange powders, no expensive supplements.</div>
+    </details>
+    <details>
+      <summary>Is it safe if I take medication?</summary>
+      <div class="fa">Every single remedy comes with honest cautions — who should avoid it and what it can interact with. These are gentle, traditional kitchen remedies, not medicine. Always talk with your doctor before starting anything new, especially if you take blood thinners or manage diabetes or blood pressure.</div>
+    </details>
+    <details>
+      <summary>What if it's not for me?</summary>
+      <div class="fa">You have a 7-day guarantee. If the book isn't what you hoped, ask for your money back within 7 days and you'll get it — simple as that.</div>
+    </details>
+    <details>
+      <summary>Is the payment secure?</summary>
+      <div class="fa">Yes. Your purchase is processed by Hotmart, a secure platform used by millions — pay by card or PayPal, and your information stays protected. Prices shown in your local currency at checkout.</div>
+    </details>
   </div>
 </section>
 
