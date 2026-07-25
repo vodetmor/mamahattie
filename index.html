@@ -86,19 +86,23 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
 .cta-btn:focus-visible { outline: 3px solid var(--paper); outline-offset: 3px; }
 .cta-note { font-size: 12px; color: var(--cream-2); margin-top: 10px; }
 .hero-mock { position: relative; text-align: center; }
-.hero-mock img { width: 100%; max-width: 560px; margin: 0 auto; border-radius: 12px;
-  box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+.hero-mock img { width: 100%; max-width: 600px; margin: 0 auto;
+  -webkit-mask-image: radial-gradient(ellipse 74% 74% at 50% 50%, #000 42%, transparent 90%);
+  mask-image: radial-gradient(ellipse 74% 74% at 50% 50%, #000 42%, transparent 90%); }
 
-/* ---------- MEET MAMA (light) ---------- */
-.mama { background: var(--paper); }
-.mama-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: 40px; align-items: center; }
-.mama-photo { border: 2px solid var(--gold); outline: 1px solid var(--gold); outline-offset: 5px;
-  border-radius: 4px; overflow: hidden; box-shadow: 0 14px 34px rgba(44,58,42,.18); }
-.mama-photo img { aspect-ratio: 4/5; object-fit: cover; object-position: 50% 22%; }
-.mama-copy .kicker { display: block; margin-bottom: 10px; }
-.mama-copy h2 { font-size: clamp(24px, 3vw, 31px); margin-bottom: 14px; }
-.mama-copy p { font-size: 15.5px; margin-bottom: 13px; }
-.mama-copy strong { color: var(--green-700); }
+/* ---------- MEET MAMA (dark, portrait fused full-bleed right) ---------- */
+.mama { position: relative; background: linear-gradient(180deg, var(--green-950) 0%, var(--green-900) 55%, var(--green-950) 100%);
+  color: var(--cream); overflow: hidden; }
+.mama-fig { position: absolute; right: 0; top: 0; bottom: 0; width: 46%; }
+.mama-fig img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%;
+  -webkit-mask-image: linear-gradient(to left, #000 55%, transparent 100%);
+  mask-image: linear-gradient(to left, #000 55%, transparent 100%); }
+.mama-inner { position: relative; z-index: 2; padding: 74px 0; }
+.mama-copy { max-width: 54%; }
+.mama-copy .kicker { display: block; margin-bottom: 10px; color: var(--gold-2); }
+.mama-copy h2 { font-size: clamp(24px, 3vw, 31px); margin-bottom: 14px; color: var(--paper); }
+.mama-copy p { font-size: 15.5px; margin-bottom: 13px; color: var(--cream); }
+.mama-copy strong { color: var(--gold-3); }
 
 /* ---------- PAIN (light) ---------- */
 .pain { background: var(--paper-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -120,19 +124,19 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
 .taste .h2 { color: var(--paper); }
 .taste .h2-sub { color: var(--cream-2); }
 .taste .kicker { display: block; text-align: center; margin-bottom: 10px; color: var(--gold-2); }
-.taste-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
-.taste-card { background: rgba(36,51,31,.55); border: 1px solid rgba(232,196,104,.22); border-radius: 14px;
-  overflow: hidden; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
-.taste-card:hover { transform: translateY(-4px); border-color: rgba(232,196,104,.55); box-shadow: 0 16px 34px rgba(0,0,0,.4); }
-.taste-photo { position: relative; }
-.taste-photo img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
-.taste-photo .num { position: absolute; left: 14px; bottom: -18px; width: 44px; height: 44px; border-radius: 50%;
-  background: var(--gold-2); color: #2A2208; font-family: 'Palatino Linotype', Georgia, serif; font-weight: 700;
-  font-size: 15px; display: flex; align-items: center; justify-content: center; border: 3px solid var(--green-900);
-  box-shadow: 0 4px 12px rgba(0,0,0,.4); }
-.taste-body { padding: 26px 18px 20px; }
-.taste-body h3 { color: var(--gold-3); font-size: 17px; margin-bottom: 6px; }
-.taste-body p { font-size: 13.5px; color: var(--cream-2); }
+.taste-strip { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 34px; }
+.taste-cell { position: relative; overflow: hidden; margin: 0; }
+.taste-cell img { width: 100%; height: 500px; object-fit: cover; transition: transform .4s ease; }
+.taste-cell:hover img { transform: scale(1.045); }
+.taste-cell::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(18,26,16,.96) 0%, rgba(18,26,16,.55) 26%, rgba(18,26,16,0) 58%),
+              linear-gradient(to bottom, rgba(18,26,16,.55) 0%, rgba(18,26,16,0) 18%); }
+.taste-cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; text-align: center; padding: 0 20px 28px; }
+.taste-cap .num { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px;
+  border-radius: 50%; background: var(--gold-2); color: #2A2208; font-family: 'Palatino Linotype', Georgia, serif;
+  font-weight: 700; font-size: 14px; margin-bottom: 10px; box-shadow: 0 4px 14px rgba(0,0,0,.45); }
+.taste-cap h3 { color: var(--gold-3); font-size: 18px; margin-bottom: 6px; }
+.taste-cap p { font-size: 13.5px; color: var(--cream); opacity: .92; max-width: 300px; margin: 0 auto; }
 .taste-more { text-align: center; margin-top: 30px; font-style: italic; color: var(--gold-3); font-size: 15.5px; }
 
 /* ---------- DISCOVER (light cards) ---------- */
@@ -225,17 +229,18 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
   .hero .chips, .hero .price-row, .hero .downloads { justify-content: center; }
   .hero-mock { order: -1; }
   .hero-mock img { max-width: 420px; }
-  .mama-grid { grid-template-columns: 1fr; gap: 26px; }
-  .mama-photo { max-width: 380px; margin: 0 auto; }
-  .mama-copy { text-align: center; }
+  .mama-fig { position: static; width: 100%; height: 340px; }
+  .mama-fig img { object-position: 50% 14%;
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent 100%); }
+  .mama-inner { padding: 6px 0 54px; }
+  .mama-copy { max-width: 100%; text-align: center; }
   .pain-cards { grid-template-columns: 1fr; }
-  .taste-cards { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .taste-strip { grid-template-columns: 1fr; }
+  .taste-cell img { height: 380px; }
 }
 @media (min-width: 720px) {
   .reviews { grid-template-columns: 1fr 1fr; }
-}
-@media (min-width: 901px) and (max-width: 1100px) {
-  .taste-cards { gap: 14px; }
 }
 </style>
 </head>
@@ -357,19 +362,17 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
 </header>
 
 <!-- ====== MEET MAMA HATTIE ====== -->
-<section class="section mama">
-  <div class="wrap">
-    <div class="mama-grid">
-      <div class="mama-photo">
-        <img src="img/mama-hero.webp" alt="Mama Hattie in her kitchen apothecary" loading="lazy" width="943" height="1664">
-      </div>
-      <div class="mama-copy">
-        <span class="kicker">The woman behind the remedies</span>
-        <h2>Meet Mama Hattie <svg class="ic ic-heart"><use href="#i-heart"/></svg></h2>
-        <p>For over fifty years, Mama Hattie has been healing folks in the South the way her grandmother taught her. Women come to her exhausted, inflamed, and hopeless. Weeks later, they leave transformed. <strong>Stomachs flat. Pain gone. Energy back. Sleeping like they haven't slept in years.</strong></p>
-        <p>Not through pills. Through remedies that have worked for generations — tested by time, proven by results.</p>
-        <p><strong>This book contains everything she knows.</strong></p>
-      </div>
+<section class="mama">
+  <div class="mama-fig">
+    <img src="img/mama-hero.webp" alt="Mama Hattie in her kitchen apothecary" loading="lazy" width="943" height="1664">
+  </div>
+  <div class="wrap mama-inner">
+    <div class="mama-copy">
+      <span class="kicker">The woman behind the remedies</span>
+      <h2>Meet Mama Hattie <svg class="ic ic-heart"><use href="#i-heart"/></svg></h2>
+      <p>For over fifty years, Mama Hattie has been healing folks in the South the way her grandmother taught her. Women come to her exhausted, inflamed, and hopeless. Weeks later, they leave transformed. <strong>Stomachs flat. Pain gone. Energy back. Sleeping like they haven't slept in years.</strong></p>
+      <p>Not through pills. Through remedies that have worked for generations — tested by time, proven by results.</p>
+      <p><strong>This book contains everything she knows.</strong></p>
     </div>
   </div>
 </section>
@@ -402,44 +405,40 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
   </div>
 </section>
 
-<!-- ====== A TASTE OF WHAT'S INSIDE (dark showcase) ====== -->
+<!-- ====== A TASTE OF WHAT'S INSIDE (dark, full-bleed triptych) ====== -->
 <section class="section taste">
   <div class="wrap">
     <span class="kicker">Straight from the book</span>
     <h2 class="h2">A Taste of What's Inside</h2>
     <p class="h2-sub">Real remedies. Real recipes. Made with what's already in your kitchen.</p>
-    <div class="taste-cards">
-      <div class="taste-card">
-        <div class="taste-photo">
-          <img src="img/golden-milk.webp" alt="Golden Milk turmeric tonic" loading="lazy" width="1024" height="1024">
-          <span class="num">#26</span>
-        </div>
-        <div class="taste-body">
-          <h3>Golden Milk</h3>
-          <p>The turmeric tonic for joint aches and the inflammation that's been stealing your mobility.</p>
-        </div>
-      </div>
-      <div class="taste-card">
-        <div class="taste-photo">
-          <img src="img/fire-cider.webp" alt="Mama's Fire Cider immune tonic" loading="lazy" width="1024" height="1024">
-          <span class="num">#41</span>
-        </div>
-        <div class="taste-body">
-          <h3>Mama's Fire Cider</h3>
-          <p>The old Southern jar that fights back at the first sign of a cold — before sickness takes hold.</p>
-        </div>
-      </div>
-      <div class="taste-card">
-        <div class="taste-photo">
-          <img src="img/rice-water.webp" alt="The 4,000-year-old rice water secret" loading="lazy" width="1024" height="1024">
-          <span class="num">#51</span>
-        </div>
-        <div class="taste-body">
-          <h3>The Rice Water Secret</h3>
-          <p>The 4,000-year-old rinse from the village where the women grow hair past their knees.</p>
-        </div>
-      </div>
-    </div>
+  </div>
+  <div class="taste-strip">
+    <figure class="taste-cell">
+      <img src="img/golden-milk.webp" alt="Golden Milk turmeric tonic" loading="lazy" width="1024" height="1024">
+      <figcaption class="taste-cap">
+        <span class="num">#26</span>
+        <h3>Golden Milk</h3>
+        <p>The turmeric tonic for joint aches and the inflammation that's been stealing your mobility.</p>
+      </figcaption>
+    </figure>
+    <figure class="taste-cell">
+      <img src="img/fire-cider.webp" alt="Mama's Fire Cider immune tonic" loading="lazy" width="1024" height="1024">
+      <figcaption class="taste-cap">
+        <span class="num">#41</span>
+        <h3>Mama's Fire Cider</h3>
+        <p>The old Southern jar that fights back at the first sign of a cold — before sickness takes hold.</p>
+      </figcaption>
+    </figure>
+    <figure class="taste-cell">
+      <img src="img/rice-water.webp" alt="The 4,000-year-old rice water secret" loading="lazy" width="1024" height="1024">
+      <figcaption class="taste-cap">
+        <span class="num">#51</span>
+        <h3>The Rice Water Secret</h3>
+        <p>The 4,000-year-old rinse from the village where the women grow hair past their knees.</p>
+      </figcaption>
+    </figure>
+  </div>
+  <div class="wrap">
     <p class="taste-more">...and 48 more remedies waiting inside.</p>
   </div>
 </section>
