@@ -224,11 +224,12 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
 .rev-prev { left: -12px; }
 .rev-next { right: -12px; }
 .review .rhead { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; }
-.review .avatar { width: 34px; height: 34px; border-radius: 50%; flex: 0 0 34px;
+.review .avatar { width: 42px; height: 42px; border-radius: 50%; flex: 0 0 42px; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Palatino Linotype', Georgia, serif; font-size: 13px; font-weight: 700; }
+  font-family: 'Palatino Linotype', Georgia, serif; font-size: 14px; font-weight: 700; }
 .review .avatar.g { background: var(--green-600); color: var(--cream); }
 .review .avatar.d { background: var(--gold-2); color: #4A3A10; }
+.review .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .review .name { font-family: 'Palatino Linotype', Georgia, serif; font-size: 13.5px; color: var(--green-700); line-height: 1.2; }
 .review .stars { display: flex; gap: 2px; margin-top: 3px; }
 .review .stars .st { width: 11px; height: 11px; color: #E0B95B; }
@@ -723,12 +724,16 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
   var host = document.getElementById('reviews');
   reviews.forEach(function (r, i) {
     var initials = r[0].split(' ').map(function (w) { return w[0]; }).join('');
+    var slug = r[0].toLowerCase().replace(/[^a-z]+/g, '-');
     var stars = '';
     for (var s = 0; s < 5; s++) stars += '<svg class="st' + (s < r[1] ? '' : ' off') + '"><use href="#i-star"/></svg>';
     var card = document.createElement('div');
     card.className = 'review';
+    // foto real do avaliador; se faltar, cai de volta pra inicial (onerror)
     card.innerHTML =
-      '<div class="rhead"><div class="avatar ' + (i % 2 ? 'd' : 'g') + '">' + initials + '</div>' +
+      '<div class="rhead"><div class="avatar ' + (i % 2 ? 'd' : 'g') + '">' +
+      '<img src="img/reviewers/' + slug + '.webp" alt="" loading="lazy" ' +
+      'onerror="this.remove();this.parentNode.textContent=\'' + initials + '\'"></div>' +
       '<div><div class="name"></div><div class="stars">' + stars + '</div></div>' +
       '<span class="verified">Verified</span></div><p></p>';
     card.querySelector('.name').textContent = r[0];
