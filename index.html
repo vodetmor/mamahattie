@@ -90,10 +90,10 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
   background: radial-gradient(ellipse 58% 54% at 50% 54%, rgba(232,196,104,.30) 0%, rgba(232,196,104,.08) 46%, transparent 74%); }
 .hero-mock::after { content: ''; position: absolute; left: 10%; right: 12%; bottom: -14px; height: 38px; z-index: 0;
   background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,0,0,.4) 0%, transparent 70%); filter: blur(7px); }
-.hero-mock img.book { position: relative; z-index: 2; width: 76%; max-width: 440px; margin: 0 22% 0 -2%;
+.hero-mock img.book { position: relative; z-index: 2; width: 66%; max-width: 390px; margin: 0 34% 0 -7%;
   filter: drop-shadow(0 16px 22px rgba(0,0,0,.38)) drop-shadow(0 3px 6px rgba(0,0,0,.25));
   animation: bookfloat 7s ease-in-out infinite; }
-.hero-mock img.tablet { position: absolute; z-index: 1; width: 58%; max-width: 340px; right: -3%; top: 7%;
+.hero-mock img.tablet { position: absolute; z-index: 1; width: 52%; max-width: 308px; right: -6%; top: 5%;
   filter: drop-shadow(0 12px 18px rgba(0,0,0,.32));
   animation: bookfloat 8.6s ease-in-out 1.2s infinite; }
 @keyframes bookfloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-13px); } }
@@ -151,27 +151,36 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
 .taste-cap p { font-size: 13.5px; color: var(--cream); opacity: .92; max-width: 300px; margin: 0 auto; }
 .taste-more { text-align: center; margin-top: 30px; font-style: italic; color: var(--gold-3); font-size: 15.5px; }
 
-/* ---------- DISCOVER (grade compacta escaneavel) ---------- */
-.disc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.disc-item { display: flex; gap: 11px; align-items: flex-start; background: var(--paper-2);
-  border: 1px solid var(--line); border-radius: 10px; padding: 13px 15px;
+/* ---------- DISCOVER (carrossel de capitulos + banner do segredo #51) ---------- */
+.disc-car { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding: 4px 2px 14px; scrollbar-width: thin; scrollbar-color: #D9BE7E transparent;
+  -webkit-overflow-scrolling: touch; }
+.disc-card { flex: 0 0 calc(33.33% - 8px); scroll-snap-align: start; background: var(--paper-2);
+  border: 1px solid var(--line); border-radius: 12px; padding: 20px 16px 16px; text-align: center;
   transition: border-color .18s ease, box-shadow .18s ease; }
-.disc-item:hover { border-color: #D9BE7E; box-shadow: 0 4px 12px rgba(184,134,47,.10); }
-.disc-item .dic { flex: none; width: 42px; height: 42px; border-radius: 50%; background: var(--paper-3);
+.disc-card:hover { border-color: #D9BE7E; box-shadow: 0 4px 12px rgba(184,134,47,.10); }
+.disc-card .dic { width: 46px; height: 46px; border-radius: 50%; background: var(--paper-3);
   border: 1px solid var(--gold); box-shadow: 0 0 0 3px rgba(184,134,47,.12);
-  display: flex; align-items: center; justify-content: center; margin-top: 2px; }
-.disc-item .dic svg { width: 24px; height: 24px; color: var(--green-600); }
-.disc-item > div { flex: 1; }
-.disc-item h3 { font-size: 14.5px; letter-spacing: .02em; margin-bottom: 2px; }
-.disc-item p { font-size: 12.5px; color: var(--ink-2); line-height: 1.5; }
-.disc-item .cnt { flex: none; align-self: flex-start; font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; }
+.disc-card .dic svg { width: 26px; height: 26px; color: var(--green-600); }
+.disc-card h3 { font-size: 15px; letter-spacing: .02em; margin-bottom: 4px; }
+.disc-card p { font-size: 12.5px; color: var(--ink-2); line-height: 1.5; margin-bottom: 10px; }
+.disc-card .cnt { display: inline-block; font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
   color: var(--gold); border: 1px solid #E0B95B; background: rgba(243,227,184,.4); border-radius: 999px;
-  padding: 3px 9px; margin-top: 3px; white-space: nowrap; }
-.disc-item.bonus { grid-column: 1 / -1; background: var(--gold-3); border-color: #E0B95B; }
-.disc-item.bonus .dic { background: #FFF9E8; }
-.disc-item.bonus .dic svg { color: var(--gold); }
-.disc-item.bonus .cnt { background: #FFF3D0; }
-@media (max-width: 640px) { .disc-grid { grid-template-columns: 1fr; } }
+  padding: 3px 10px; white-space: nowrap; }
+@media (max-width: 720px) { .disc-card { flex: 0 0 74%; } }
+
+.disc-bonus { position: relative; border-radius: 14px; overflow: hidden; margin-top: 16px; }
+.disc-bonus img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
+.disc-bonus::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(10,13,9,.94) 0%, rgba(10,13,9,.78) 48%, rgba(10,13,9,.28) 100%); }
+.disc-bonus .inner { position: relative; z-index: 2; display: flex; gap: 18px; align-items: center; padding: 26px 28px; }
+.disc-bonus .num { flex: none; width: 50px; height: 50px; border-radius: 50%; background: var(--gold-2); color: #2A2208;
+  font-family: 'Palatino Linotype', Georgia, serif; font-weight: 700; font-size: 16px;
+  display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,.4); }
+.disc-bonus h3 { color: var(--gold-3); font-size: 17.5px; margin-bottom: 4px; }
+.disc-bonus p { color: var(--cream); font-size: 14.5px; font-style: italic; line-height: 1.55; }
+@media (max-width: 640px) { .disc-bonus .inner { padding: 20px 18px; } }
 
 /* ---------- includes checklist (dark card) ---------- */
 .includes { background: var(--green-700); color: var(--cream); border-radius: 14px; padding: 26px 24px; margin: 30px 0 0; }
@@ -551,17 +560,31 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
     <h2 class="h2">Inside You'll Discover <svg class="ic" style="color:var(--green-600)"><use href="#i-check"/></svg></h2>
     <p class="h2-sub">51 remedies. Nine sections. One grandmother's kitchen.</p>
 
-    <div class="disc-grid">
-      <div class="disc-item"><span class="dic"><svg><use href="#b-skin"/></svg></span><div><h3>Look Younger</h3><p>Soften lines, fade spots, tighten your jawline, regrow your edges.</p></div><span class="cnt">10 remedies</span></div>
-      <div class="disc-item"><span class="dic"><svg><use href="#d-dress"/></svg></span><div><h3>The Sunday Dress</h3><p>Get back into the dress waiting in your closet — no diets, no suffering.</p></div><span class="cnt">5 remedies</span></div>
-      <div class="disc-item"><span class="dic"><svg><use href="#b-sugar"/></svg></span><div><h3>The Sugar</h3><p>Steady your blood sugar and stop the crashes.</p></div><span class="cnt">5 remedies</span></div>
-      <div class="disc-item"><span class="dic"><svg><use href="#d-wash"/></svg></span><div><h3>Wash It Out</h3><p>Flush the parasites, toxins, and waste your body's been holding.</p></div><span class="cnt">5 remedies</span></div>
-      <div class="disc-item"><span class="dic"><svg><use href="#b-joints"/></svg></span><div><h3>Aches &amp; Pains</h3><p>Calm the inflammation stealing your joints and mobility.</p></div><span class="cnt">5 remedies</span></div>
-      <div class="disc-item"><span class="dic"><svg><use href="#b-sleep"/></svg></span><div><h3>Beauty Sleep</h3><p>Fall asleep faster, stay asleep longer, wake up rested.</p></div><span class="cnt">5 remedies</span></div>
-      <div class="disc-item"><span class="dic"><svg><use href="#d-flower"/></svg></span><div><h3>Women's Health &amp; The Change</h3><p>Cramps, hormones, hot flashes — remedies that actually work.</p></div><span class="cnt">5 remedies</span></div>
-      <div class="disc-item"><span class="dic"><svg><use href="#d-shield"/></svg></span><div><h3>Winter Armor</h3><p>An immune system that protects you all year long.</p></div><span class="cnt">5 remedies</span></div>
-      <div class="disc-item"><span class="dic"><svg><use href="#b-belly"/></svg></span><div><h3>A Happy Belly</h3><p>End the bloating, gas, and bathroom struggles.</p></div><span class="cnt">5 remedies</span></div>
-      <div class="disc-item bonus"><span class="dic"><svg><use href="#b-hair"/></svg></span><div><h3>The One Mama Saved For Last</h3><p>The 4,000-year-old rice water secret from the village where the women grow hair past their knees.</p></div><span class="cnt">#51</span></div>
+    <div class="rev-wrap">
+      <button class="rev-nav rev-prev" type="button" id="disc-prev" aria-label="Previous sections">&#10094;</button>
+      <div class="disc-car" id="disc-car">
+        <div class="disc-card"><span class="dic"><svg><use href="#b-skin"/></svg></span><h3>Look Younger</h3><p>Soften lines, fade spots, tighten your jawline, regrow your edges.</p><span class="cnt">10 remedies</span></div>
+        <div class="disc-card"><span class="dic"><svg><use href="#d-dress"/></svg></span><h3>The Sunday Dress</h3><p>Get back into the dress waiting in your closet — no diets, no suffering.</p><span class="cnt">5 remedies</span></div>
+        <div class="disc-card"><span class="dic"><svg><use href="#b-sugar"/></svg></span><h3>The Sugar</h3><p>Steady your blood sugar and stop the crashes.</p><span class="cnt">5 remedies</span></div>
+        <div class="disc-card"><span class="dic"><svg><use href="#d-wash"/></svg></span><h3>Wash It Out</h3><p>Flush the parasites, toxins, and waste your body's been holding.</p><span class="cnt">5 remedies</span></div>
+        <div class="disc-card"><span class="dic"><svg><use href="#b-joints"/></svg></span><h3>Aches &amp; Pains</h3><p>Calm the inflammation stealing your joints and mobility.</p><span class="cnt">5 remedies</span></div>
+        <div class="disc-card"><span class="dic"><svg><use href="#b-sleep"/></svg></span><h3>Beauty Sleep</h3><p>Fall asleep faster, stay asleep longer, wake up rested.</p><span class="cnt">5 remedies</span></div>
+        <div class="disc-card"><span class="dic"><svg><use href="#d-flower"/></svg></span><h3>Women's Health &amp; The Change</h3><p>Cramps, hormones, hot flashes — remedies that actually work.</p><span class="cnt">5 remedies</span></div>
+        <div class="disc-card"><span class="dic"><svg><use href="#d-shield"/></svg></span><h3>Winter Armor</h3><p>An immune system that protects you all year long.</p><span class="cnt">5 remedies</span></div>
+        <div class="disc-card"><span class="dic"><svg><use href="#b-belly"/></svg></span><h3>A Happy Belly</h3><p>End the bloating, gas, and bathroom struggles.</p><span class="cnt">5 remedies</span></div>
+      </div>
+      <button class="rev-nav rev-next" type="button" id="disc-next" aria-label="Next sections">&#10095;</button>
+    </div>
+
+    <div class="disc-bonus">
+      <img class="bg" src="img/rice-water.webp" alt="" loading="lazy">
+      <div class="inner">
+        <span class="num">#51</span>
+        <div>
+          <h3>The One Mama Saved For Last</h3>
+          <p>"The 4,000-year-old rice water secret from the village where the women grow hair past their knees."</p>
+        </div>
+      </div>
     </div>
 
     <div class="includes">
@@ -713,13 +736,15 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
     host.appendChild(card);
   });
 
-  /* ---- carrossel de reviews: setas rolam ~1 pagina ---- */
-  document.querySelector('.rev-prev').addEventListener('click', function () {
-    host.scrollBy({ left: -host.clientWidth * 0.92, behavior: 'smooth' });
-  });
-  document.querySelector('.rev-next').addEventListener('click', function () {
-    host.scrollBy({ left: host.clientWidth * 0.92, behavior: 'smooth' });
-  });
+  /* ---- carrosseis (reviews + capitulos): setas rolam ~1 pagina ---- */
+  function bindCarousel(trackId, prevEl, nextEl) {
+    var track = document.getElementById(trackId);
+    prevEl.addEventListener('click', function () { track.scrollBy({ left: -track.clientWidth * 0.92, behavior: 'smooth' }); });
+    nextEl.addEventListener('click', function () { track.scrollBy({ left: track.clientWidth * 0.92, behavior: 'smooth' }); });
+  }
+  var revWrap = document.getElementById('reviews').parentElement;
+  bindCarousel('reviews', revWrap.querySelector('.rev-prev'), revWrap.querySelector('.rev-next'));
+  bindCarousel('disc-car', document.getElementById('disc-prev'), document.getElementById('disc-next'));
 
   /* ---- sticky CTA: acompanha a pagina inteira (1 scroll so).
      Fora do checkout: ancora para #checkout. Dentro do checkout: vira
