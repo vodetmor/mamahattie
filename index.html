@@ -676,16 +676,31 @@ h1,h2,h3,h4 { font-family: 'Palatino Linotype','Book Antiqua', Georgia, serif; f
     host.appendChild(card);
   });
 
-  /* ---- sticky CTA: show after hero scrolls away, hide while checkout is on screen ---- */
+  /* ---- sticky CTA: acompanha a pagina inteira (1 scroll so).
+     Fora do checkout: ancora para #checkout. Dentro do checkout: vira
+     "Finish your order" e desce ate a barra real de compra da Hotmart
+     (fixa no fim do iframe, inalcancavel via cross-origin). Some apenas
+     quando a barra verde real ja esta na tela. ---- */
   var sticky = document.getElementById('sticky-cta');
+  var stickyBtn = sticky.querySelector('a');
   var hero = document.querySelector('.hero');
   var checkout = document.getElementById('checkout');
+  var inCheckout = false;
   function refresh() {
     var heroGone = hero.getBoundingClientRect().bottom < 0;
-    var c = checkout.getBoundingClientRect();
-    var checkoutVisible = c.top < window.innerHeight && c.bottom > 0;
-    sticky.classList.toggle('hidden', !heroGone || checkoutVisible);
+    var fr = frame.getBoundingClientRect();
+    var realBarVisible = fr.bottom < window.innerHeight + 130 && fr.top < window.innerHeight;
+    inCheckout = checkout.getBoundingClientRect().top < window.innerHeight * 0.6;
+    stickyBtn.textContent = inCheckout ? 'Finish your order ↓' : 'Get Instant Access';
+    sticky.classList.toggle('hidden', !heroGone || realBarVisible);
   }
+  stickyBtn.addEventListener('click', function (e) {
+    if (inCheckout) {
+      e.preventDefault();
+      var fr = frame.getBoundingClientRect();
+      window.scrollTo({ top: fr.bottom + window.scrollY - window.innerHeight + 16, behavior: 'smooth' });
+    }
+  });
   window.addEventListener('scroll', refresh, { passive: true });
   window.addEventListener('resize', refresh);
   refresh();
